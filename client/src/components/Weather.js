@@ -67,7 +67,7 @@ const Weather = () => {
         
         
         {/* 城市搜索 */}
-        <div style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
+        <div style={{ display: 'flex', gap: 10, marginBottom: 20, justifyContent: 'center'}}>
           <TextField
             label="Enter City"
             value={city}
@@ -85,15 +85,30 @@ const Weather = () => {
         {/* 天气信息展示 */}
         {weatherData && (
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, width: '100%', marginLeft: -10 }}>
               {weatherData.icon.includes('01') ? <WbSunny /> : <Cloud />}
               <Typography variant="h5">{weatherData.city}</Typography>
             </div>
             
-            <div style={{ margin: '20px 0' }}>
-              <Typography><Opacity /> Humidity: {weatherData.humidity}%</Typography>
-              <Typography><Air /> Wind: {weatherData.windSpeed} m/s</Typography>
-              <Typography>Temperature: {weatherData.temp}°C</Typography>
+            {/* // 修改湿度、风速等指标的展示部分 */}
+            <div style={{display:'flex', margin: '20px 0', justifyContent: 'center', width: '100%', alignItems: 'center' }}>
+            {/* 湿度 */}
+            <Typography sx={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', width: '100%'}}>
+                <Opacity sx={{ fontSize: '20px' }} /> 
+                <span>Humidity: {weatherData.humidity}%</span>
+            </Typography>
+
+            {/* 风速 */}
+            <Typography sx={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', width: '100%' }}>
+                <Air sx={{ fontSize: '20px' }} /> 
+                <span>Wind: {weatherData.windSpeed} m/s</span>
+            </Typography>
+
+            {/* 温度（如果也需要对齐） */}
+            <Typography sx={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', width: '100%' }}>
+                <WbSunny sx={{ fontSize: '20px' }} /> 
+                <span>Temperature: {weatherData.temp}°C</span>
+            </Typography>
             </div>
 
             {/* 图表 */}
