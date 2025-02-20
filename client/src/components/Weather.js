@@ -3,7 +3,25 @@ import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import { TextField, Button, Card, CardContent, Typography } from '@mui/material';
 import { WbSunny, Cloud, Opacity, Air } from '@mui/icons-material';
-
+// 在 App.jsx 顶部添加以下代码
+import { Chart as ChartJS, 
+    CategoryScale, 
+    LinearScale, 
+    LineElement, 
+    PointElement, 
+    Title, 
+    Tooltip 
+  } from 'chart.js';
+  
+  // 注册必要的组件
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    LineElement,
+    PointElement,  // 修复 'point' 未注册错误
+    Title,
+    Tooltip
+  );
 const Weather = () => {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
@@ -42,10 +60,11 @@ const Weather = () => {
 
   return (
     <Card sx={{ maxWidth: 600, margin: '20px auto', padding: 2 }}>
+    <h1>Weather Dashboard</h1>
       <CardContent>
         <Typography variant="h4" gutterBottom>
-          Weather Dashboard
         </Typography>
+        
         
         {/* 城市搜索 */}
         <div style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
@@ -78,14 +97,14 @@ const Weather = () => {
             </div>
 
             {/* 图表 */}
-            {chartData && (
+            {/* {chartData && (
               <div style={{ height: 300 }}>
                 <Line 
                   data={chartData}
                   options={{ maintainAspectRatio: false }}
                 />
               </div>
-            )}
+            )} */}
           </div>
         )}
       </CardContent>

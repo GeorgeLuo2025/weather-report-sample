@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import './components/Weather'
-
+import Weather from './components/Weather';
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      {/* <p>这是app components</p> */}
+      {/* <header className="App-header"> */}
+        {/* <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -17,8 +17,8 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
-      </header> */}
+        </a> */}
+      {/* </header> */}
       <Weather></Weather>
     </div>
   );
