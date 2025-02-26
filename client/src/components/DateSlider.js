@@ -1,38 +1,39 @@
-import { Box } from '@mui/material';
+// components/DateSlider.jsx
+import PropTypes from 'prop-types';
+import Slider from '@mui/material/Slider';
+import { format } from 'date-fns';
 
 const DateSlider = ({ dates, selected, onChange }) => {
+  const dateToValue = (date) => dates.indexOf(date);
+  
+  const valueToDate = (value) => dates[value];
+  
+  const marks = dates.map((date, index) => ({
+    value: index,
+    label: format(date, 'MM/dd')
+  }));
+
   return (
-    <Box sx={{
-      display: 'flex',
-      overflowX: 'auto',
-      gap: 2,
-      py: 2,
-      borderBottom: '1px solid #ddd'
-    }}>
-      {dates.map(date => (
-        <Box
-          key={date.toString()}
-          onClick={() => onChange(date)}
-          sx={{
-            flexShrink: 0,
-            padding: 2,
-            border: date.toString() === selected.toString() 
-              ? '2px solid #1976d2' 
-              : '1px solid #ccc',
-            borderRadius: 2,
-            cursor: 'pointer',
-            backgroundColor: date.toString() === selected.toString() 
-              ? '#e3f2fd' 
-              : 'white'
-          }}>
-          {date.toLocaleDateString('zh-CN', {
-            month: 'short',
-            day: 'numeric'
-          })}
-        </Box>
-      ))}
-    </Box>
+    <div style={{ padding: '20px 40px' }}>
+        {/* sdfsoijlkm */}
+      <Slider
+        value={dateToValue(selected)}
+        min={0}
+        max={dates.length - 1}
+        step={1}
+        marks={marks}
+        onChange={(_, value) => onChange(valueToDate(value))}
+        valueLabelDisplay="auto"
+        valueLabelFormat={(value) => format(dates[value], 'EEE, MMM d')}
+      />
+    </div>
   );
+};
+
+DateSlider.propTypes = {
+  dates: PropTypes.arrayOf(PropTypes.instanceOf(Date)).isRequired,
+  selected: PropTypes.instanceOf(Date).isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default DateSlider;

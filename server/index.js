@@ -7,6 +7,8 @@ const app = express();
 app.use(cors());
 const port = process.env.PORT || 5000;
 
+
+
 // 获取天气数据接口
 app.get('/api/weather', async (req, res) => {
   try {
@@ -52,7 +54,7 @@ app.get('/api/weather/forecast', async (req, res) => {
         return res.status(400).json({ error: 'Invalid parameters' });
       }
   
-      const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast/climate?q=wuhan&units=metric&appid=${process.env.OPENWEATHER_API_KEY}`);
+      const response = await axios.get(`${apiUrl}`);
     //   console.log(response);
     //   const data = {
     //     temp: response.data.main.temp,
