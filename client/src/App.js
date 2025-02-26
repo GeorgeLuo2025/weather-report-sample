@@ -139,6 +139,122 @@ return (
         </Grid>
       )}
 
+    {/* 天气详细信息展示 */}
+      {weatherData && !loading && weatherData[selectedIdx] && (
+        <Grid container spacing={3} sx={{ mt: 2, mb: 4 }}>
+          <Grid item xs={12} md={6}>
+            <Paper sx={{ p: 3, borderRadius: 2 }}>
+              <Typography variant="h5" gutterBottom sx={{ fontWeight: 600 }}>
+                天气详情
+              </Typography>
+              
+              <Grid container spacing={2}>
+                {/* 日出日落时间 */}
+                <Grid item xs={6}>
+                  <Typography variant="body2" color="text.secondary">
+                    日出
+                  </Typography>
+                  <Typography>
+                    {new Date(weatherData[selectedIdx].sunrise * 1000)
+                      .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography variant="body2" color="text.secondary">
+                    日落
+                  </Typography>
+                  <Typography>
+                    {new Date(weatherData[selectedIdx].sunset * 1000)
+                      .toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </Typography>
+                </Grid>
+
+                {/* 温度范围 */}
+                <Grid item xs={12}>
+                  <Divider sx={{ my: 2 }} />
+                </Grid>
+                <Grid item xs={4}>
+                  <Typography variant="body2" color="text.secondary">
+                    最高温度
+                  </Typography>
+                  <Typography variant="h6">
+                    {Math.round(weatherData[selectedIdx].temp.max)}°C
+                  </Typography>
+                </Grid>
+                <Grid item xs={4}>
+                  <Typography variant="body2" color="text.secondary">
+                    最低温度
+                  </Typography>
+                  <Typography variant="h6">
+                    {Math.round(weatherData[selectedIdx].temp.min)}°C
+                  </Typography>
+                </Grid>
+                <Grid item xs={4}>
+                  <Typography variant="body2" color="text.secondary">
+                    体感温度
+                  </Typography>
+                  <Typography variant="h6">
+                    {Math.round(weatherData[selectedIdx].feels_like.day)}°C
+                  </Typography>
+                </Grid>
+
+                {/* 气象指标 */}
+                <Grid item xs={12}>
+                  <Divider sx={{ my: 2 }} />
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography variant="body2" color="text.secondary">
+                    气压
+                  </Typography>
+                  <Typography>{weatherData[selectedIdx].pressure}hPa</Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography variant="body2" color="text.secondary">
+                    湿度
+                  </Typography>
+                  <Typography>{weatherData[selectedIdx].humidity}%</Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography variant="body2" color="text.secondary">
+                    风速
+                  </Typography>
+                  <Typography>{weatherData[selectedIdx].speed}m/s</Typography>
+                </Grid>
+                <Grid item xs={3}>
+                  <Typography variant="body2" color="text.secondary">
+                    云量
+                  </Typography>
+                  <Typography>{weatherData[selectedIdx].clouds}%</Typography>
+                </Grid>
+
+                {/* 降雨量（条件显示） */}
+                {weatherData[selectedIdx].rain && (
+                  <>
+                    <Grid item xs={12}>
+                      <Divider sx={{ my: 2 }} />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography variant="body2" color="text.secondary">
+                        降雨量
+                      </Typography>
+                      <Typography>
+                        {weatherData[selectedIdx].rain}mm
+                      </Typography>
+                    </Grid>
+                  </>
+                )}
+              </Grid>
+            </Paper>
+          </Grid>
+
+
+
+
+          
+        </Grid>
+      )}
+
+
     {/* 天气预测卡片区域 */}
     {weatherData && !loading && (
 
